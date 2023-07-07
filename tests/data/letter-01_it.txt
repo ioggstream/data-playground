@@ -1,0 +1,10 @@
+From: luca.bianchi@example.com
+
+Caro Signor Rossi,
+
+Sono lieto di scrivere questa lettera per fornirle alcuni dati personali come richiesto. Il mio nome è Luca Bianchi, il mio numero di telefono è +39 1234567890, il mio IBAN è IT12A3456789012345678901234 e il mio numero di carta d'identità è ABC123456.
+
+L'indirizzo della mia residenza è Via Verdi, 1, 20100 Milano. Spero che queste informazioni siano utili per il suo scopo. Se ci sono altre informazioni di cui ha bisogno, non esiti a chiedere.
+
+Cordiali saluti,
+Luca Bianchi

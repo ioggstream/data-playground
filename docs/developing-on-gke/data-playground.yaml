@@ -1,0 +1,59 @@
+# A data-playground kubernetes manifest file.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-playground-pv-claim
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 4Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: data-playground
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: data-playground
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-playground
+spec:
+  selector:
+    matchLabels:
+      app: data-playground
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: data-playground
+    spec:
+      containers:
+        # See https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-resource-requests#min-max-requests
+        - image: docker.io/library/ubuntu:22.04
+          name: shell
+          command: ["/bin/bash", "-c", "--"]
+          args: ["tail -f /dev/null;"]
+          volumeMounts:
+            - name: data-playground-persistent-storage
+              mountPath: /code
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 4Gi
+            requests:
+              cpu: 1000m
+              memory: 4Gi
+      volumes:
+        - name: data-playground-persistent-storage
+          persistentVolumeClaim:
+            claimName: data-playground-pv-claim

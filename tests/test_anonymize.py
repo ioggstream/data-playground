@@ -67,8 +67,6 @@ def ensure_utf8(fpath: Path):
         fpath.write_text(text, encoding="utf-8")
 
 
-
-
 @pytest.mark.parametrize(
     "name,fpath,needles",
     [[f.name, f, ("IT12A3456789012345678901234",)] for f in DATADIR.glob("**/*.txt")],
@@ -83,7 +81,8 @@ def test_iban(
 
 
 @pytest.mark.parametrize(
-    "name,fpath,needles", [[f.name, f, ("CA12345BB",)] for f in DATADIR.glob("**/*.txt")]
+    "name,fpath,needles",
+    [[f.name, f, ("CA12345BB",)] for f in DATADIR.glob("**/*.txt")],
 )
 def test_cie(
     name,
@@ -130,6 +129,7 @@ def harn_anonymizer(name, fpath, addon):
     # Then the text is different from the original
     assert anonymized_text != text
     return anonymized_text
+
 
 @pytest.mark.parametrize("name,fpath", [[f.name, f] for f in DATADIR.glob("**/*.txt")])
 def test_chain(name, fpath):
